@@ -14,67 +14,66 @@ import Node from './node';
 
 class BinaryTree {
 	constructor() {
-      
-        this.root = new Node (null, null, null);
-        //var bt = new BinaryTree();
+        this.root = null;    
    	}
 
 	insert(data) {
       
-      var a = this.root;
-      var b = 'nothing';
+      var currentNode = this.root;
       
-      function insertData(data){
+      (function insertData(data){
       
-      if (a == null){
-       	a = new Node (data, null, null);
-      } else {
-    	  if (a.data > data){
-             
-             a = a.left;
-             insertData(data);
+        if (currentNode == null){
+        currentNode.data = data;
+      	currentNode.left = null;
+      	currentNode.right = null;
+        } else {
+      	  if (currentNode.data > data){
+               
+               currentNode = currentNode.left;
+               insertData(data);
 
-    	  } else {
-    	  	if (a.data < data){
-    	     
-    	     a = a.right;
-             insertData(data);
+      	  } else {
+      	  	if (currentNode.data < data){
+      	     
+      	     currentNode = currentNode.right;
+               insertData(data);
 
-    	  	} else {
-    	  		alert ("Узел со значением " + data + " уже существует")
-    	  	}
-    	  }
-      }
-      }()
+      	  	} else {
+      	  		alert ("Node with " + data + " exists")
+      	  	}
+      	  }
+        }
+      }())
 
 	}
 
 	contains(data) {
 
-     var a = this.root;
+     var currentNode = this.root;
       
-      function containsData(data){
+      (function containsData(data){
       
-      if (a.data == data){
-       	return true;
-      } else {
-    	  if (a.data > data){
-             
-             a = a.left;
-             containsData(data);
+        if (currentNode.data == data){
+         	return true;
+        } else {
+      	  if (currentNode.data > data){
+               
+               currentNode = currentNode.left;
+               containsData(data);
 
-    	  } else {
-    	  	if (a.data < data){
-    	     
-    	     a = a.right;
-             containsData(data);
+      	  } else {
+      	  	if (currentNode.data < data){
+      	     
+      	     currentNode = currentNode.right;
+               containsData(data);
 
-    	  	} else {
-    	  		alert ("Узел со значением " + data + " не существует")
-    	  	}
-    	  }
-      }
-      }() 
+      	  	} else {
+      	  		alert ("Node with " + data + " doesn't exist")
+      	  	}
+      	  }
+        }
+      }()) 
 
 
 	}
@@ -84,26 +83,26 @@ class BinaryTree {
 	}
 
 	size() {
-      var a = this.root;
-      var k = 0;
+      var currentNode = this.root;
+      var counter = 0;
 
-      function sizeData(){
+      (function sizeData(){
       
-       if (a.data){
-       	     k++;
-       } 
-       if (a.left.data){    
-             a = a.left;
-             sizeData();
-       } 
-       if (a.right.data){    
-             a = a.right;
-             sizeData();
-       } 
+         if (currentNode.data){
+         	     counter++;
+         } 
+         if (currentNode.left.data){    
+               currentNode = currentNode.left;
+               sizeData();
+         } 
+         if (currentNode.right.data){    
+               currentNode = currentNode.right;
+               sizeData();
+         } 
 
-       return k;
+         return counter;
     	  
-      }() 
+      }()) 
 
 
 
