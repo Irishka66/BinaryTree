@@ -15,14 +15,6 @@ class BinaryTree {
 	  //  }
 
 	   
-	   //        class Node {
-				// 	constructor(data, left, right) {
-				// 		this.data = data || null;
-				// 		this.left = left || null;
-				// 		this.right = right || null;
-				// 	}
-				// }
-
               var currentNode = this.root;
 
 	          function insertData(nodeData){
