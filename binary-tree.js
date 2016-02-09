@@ -59,41 +59,50 @@ class BinaryTree {
 
 	remove(data) {
  
-    //without case 2 children
-		var currentNode = this.root;
- 
+  this.root = this.removeNode(this.root, data); 
+} 
+          
+     removeNode(node, data) { 
+          if (node == null){ 
+              return null; 
+          } 
+          if (data == node.data) { 
+              // node has no children 
+              if (node.left == null && node.right == null){ 
+                  return null; 
+              } 
+              // node has no left child 
+              if (node.left == null){ 
+                  return node.right; 
+              } 
+              // node has no right child 
+              if (node.right == null){ 
+                  return node.left; 
+              } 
+              // node has two children 
+              var tempNode = this.getSmallest(node.right); 
+              node.data = tempNode.data; 
+              node.right = this.removeNode(node.right, tempNode.data); 
+              return node; 
+          
+          } else if (data < node.data) { 
+              node.left = this.removeNode(node.left, data); 
+              return node; 
+          } else { 
+              node.right = this.removeNode(node.right, data); 
+              return node; 
+          } 
+      } 
 
-		  while (true){
-			   if (currentNode.data > data){ 
-			        if(currentNode.left.data == data){
-                          if(currentNode.left.left == null && currentNode.left.right == null){
-                          	  currentNode.left = null;
-                          } else if (currentNode.left.left == null){
-                              currentNode.left = currentNode.left.right; 
-                          } else if (currentNode.left.right == null){
-                          	  currentNode.left = currentNode.left.left;
-                          }
-                          break;
-			        }
-			        currentNode = currentNode.left; 
+  getSmallest(current) { 
+    
+    while (!(current.left == null)) { 
+        current = current.left; 
+    } 
+    return current.data; 
+  } 
 
-			   }else if (currentNode.data < data){ 
-			        if(currentNode.right.data == data){
-                          if(currentNode.right.left == null && currentNode.right.right == null){
-                          	  currentNode.right = null;
-                          } else if (currentNode.right.left == null){
-                              currentNode.right = currentNode.right.right; 
-                          } else if (currentNode.right.right == null){
-                          	  currentNode.right = currentNode.right.left;
-                          }
-                          break;
-			        } 
-			        currentNode = currentNode.right;
-			   
-			   }
-		  }
 
-	}
 
 	size() {
 
