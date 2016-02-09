@@ -58,10 +58,40 @@ class BinaryTree {
 	}
 
 	remove(data) {
+ 
+    //without case 2 children
+		var currentNode = this.root;
+ 
 
+		  while (true){
+			   if (currentNode.data > data){ 
+			        if(currentNode.left.data == data){
+                          if(currentNode.left.left == null && currentNode.left.right == null){
+                          	  currentNode.left = null;
+                          } else if (currentNode.left.left == null){
+                              currentNode.left = currentNode.left.right; 
+                          } else if (currentNode.left.right == null){
+                          	  currentNode.left = currentNode.left.left;
+                          }
+                          break;
+			        }
+			        currentNode = currentNode.left; 
 
-
-
+			   }else if (currentNode.data < data){ 
+			        if(currentNode.right.data == data){
+                          if(currentNode.right.left == null && currentNode.right.right == null){
+                          	  currentNode.right = null;
+                          } else if (currentNode.right.left == null){
+                              currentNode.right = currentNode.right.right; 
+                          } else if (currentNode.right.right == null){
+                          	  currentNode.right = currentNode.right.left;
+                          }
+                          break;
+			        } 
+			        currentNode = currentNode.right;
+			   
+			   }
+		  }
 
 	}
 
