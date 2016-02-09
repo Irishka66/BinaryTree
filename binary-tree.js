@@ -9,60 +9,51 @@ class BinaryTree {
 
 	insert(data) {
 
-	  // if (this.root === null) {
-   //         this.root = new Node (data, null, null);
-   //         return;
-	  //  }
+	   var currentNode;
 
-	   
-              var currentNode = this.root;
-
-	          function insertData(nodeData){
-	              if (!currentNode){
-	              currentNode = new Node (nodeData);
-	              return; 
-	              } else {
-	                    if (currentNode.data > nodeData){
-	                         currentNode = currentNode.left;
-	                         insertData(nodeData);
-	                    } else {
-	                          if (currentNode.data < nodeData){
-	                               currentNode = currentNode.right;
-	                               insertData(nodeData);
-	                          }else {
-	                              return; 
-	                          }
-	                    }
-	              }
-	            }
-
-	    insertData(data);
-	    return; // надо ли писать ретурн?
-
+		if (this.root == null) {
+			this.root = new Node(data);
+		} else {
+			currentNode = this.root;
+		}
+			
+		while (currentNode) {
+			if (currentNode.data > data) {
+				if (currentNode.left != null) 
+					currentNode = currentNode.left;
+				else {
+					currentNode.left = new Node(data);
+					break;	
+				}
+			} else if (currentNode.data < data) {
+				if (currentNode.right != null) 
+					currentNode = currentNode.right;
+				else {
+					currentNode.right = new Node(data);
+					break;
+				}
+			} else break;	
+		}
+		
 	}
 
 	contains(data) {
 
-	     var currentNode = this.root;
-	        function containsData(nodeData){
-	            if (currentNode.data == nodeData){
-	              return true;
-	            } else {
-	                  if (currentNode.data > nodeData){
-	                       currentNode = currentNode.left;
-	                       containsData(nodeData);
-	                  } else {
-	                        if (currentNode.data < nodeData){
-	                           currentNode = currentNode.right;
-	                           containsData(nodeData);
-	                        } else {
-	                              return false;
-	                        }
-	                  }
-	            }
-	        }
-	     
-	     return containsData(data);
+		var currentNode = this.root;
+		var soughtFor = false; 
+
+		  while (currentNode != null){
+			   if (currentNode.data > data) 
+			        currentNode = currentNode.left; 
+			   else if (currentNode.data < data) 
+			        currentNode = currentNode.right;
+			   else if (currentNode.data == data ){ 
+				    soughtFor = true;
+				    break;
+			   }
+		  }
+		  
+		return soughtFor;
 
 	}
 
@@ -70,27 +61,26 @@ class BinaryTree {
 
 
 
+
+
 	}
 
 	size() {
 
-      var currentNode = this.root;
-      var counter = 0;
+       var counter = 0;
+       if (this.root)
+            sizeOfTree(this.root);
 
-	      function sizeData(currentNode){
-	         if (currentNode.data){
-	         	     counter++;
-	         }	     
-	         if (currentNode.left.data){    
-     	             sizeData(currentNode.left);
-	         } 
-	         if (currentNode.right.data){    
-	                 sizeData(currentNode.left);
-	         }
-           return counter;
-	      }
-    
-      return sizeData(currentNode);
+        function sizeOfTree(currentNode) {
+            if (currentNode)
+                counter++;
+            if (currentNode.left)
+                sizeOfTree(currentNode.left);
+            if (currentNode.right)
+                sizeOfTree(currentNode.right); 
+        }
+       
+        return counter;
 
 	}
 
