@@ -101,7 +101,7 @@ class BinaryTree {
       return node;
     }
     else {
-      return getSmallest(node.left);
+      return this.getSmallest(node.left);
     }
   } 
 
