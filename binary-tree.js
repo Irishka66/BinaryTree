@@ -58,11 +58,12 @@ class BinaryTree {
 	}
 
 	remove(data) {
+  
+  this.root = this.removeNode(this.root, data);
+  
+  }
  
-  this.root = this.removeNode(this.root, data); 
-} 
-          
-     removeNode(node, data) { 
+  removeNode(node, data) { 
           if (node == null){ 
               return null; 
           } 
@@ -94,15 +95,15 @@ class BinaryTree {
           } 
       } 
 
-  getSmallest(current) { 
+  getSmallest(node) { 
     
-    while (!(current.left == null)) { 
-        current = current.left; 
-    } 
-    return current.data; 
+    if(node.left == null){
+      return node;
+    }
+    else {
+      return getSmallest(node.left);
+    }
   } 
-
-
 
 	size() {
 
